@@ -35,8 +35,12 @@ open class RecyclerViewAdapter(
         if (task.finished) {
             holder.image.setImageResource(R.drawable.ic_user_check_solid)
             holder.name.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        } else if (task.date < getDate())
-            holder.image.setImageResource(R.drawable.ic_user_times_solid)
+        } else {
+            if (task.date <= getDate())
+                holder.image.setImageResource(R.drawable.ic_user_times_solid)
+            else
+                holder.image.setImageResource(R.drawable.person_task_incomplete)
+        }
     }
 
     private fun getDate(): String {

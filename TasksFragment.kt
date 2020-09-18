@@ -30,7 +30,7 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
         view.rvTasks.layoutManager = LinearLayoutManager(context)
 
         view.rvTasks.adapter = adapter
-
+        adapter.notifyDataSetChanged()
         val uid = (activity as Tasks).auth.uid
         val myRef = Firebase.database.reference.child("Tasks").child(uid!!)
 

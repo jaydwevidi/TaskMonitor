@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -41,10 +42,21 @@ class MainActivity : AppCompatActivity() {
         var codeSent = false
         //var mTasksViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
-        if (currentUser != null)
+        if (currentUser != null) {
             userLoggedIn()
-        else
+        } else {
+            view5.visibility = View.GONE
             progressBar.visibility = View.INVISIBLE
+            view2.isVisible = true
+            view3.isVisible = true
+            view.isVisible = true
+            ET_PhoneNumber.isVisible = true
+            ET_OTP_code.isVisible = true
+            button.isVisible = true
+            TV_forgotPassword.isVisible = true
+
+
+        }
         //auth.createUserWithEmailAndPassword("jayraj1999@gmail.com","jayraj01")
 
         button.setOnClickListener {

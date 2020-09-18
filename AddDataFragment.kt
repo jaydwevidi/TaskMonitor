@@ -2,19 +2,13 @@ package com.example.myapplication
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_add_data.*
 import kotlinx.android.synthetic.main.fragment_add_data.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -39,18 +33,7 @@ class AddDataFragment : Fragment(),DatePickerDialog.OnDateSetListener, TimePicke
         /*view.ET_TaskDate.setOnClickListener {
             showDatePicker()
         }*/
-
-        v.addTaskButton.setOnClickListener {
-            if (v.buttonDatePicker.text.toString() == "")
-                Toast.makeText(context, "Select Date First", Toast.LENGTH_SHORT).show()
-            else if (v.ET_TaskName.text.toString() == "")
-                Toast.makeText(context, "Add Task Name", Toast.LENGTH_SHORT).show()
-            else {
-                addTaskToDatabase()
-                findNavController().navigate(R.id.action_addDataFragment_to_tasksFragment)
-            }
-        }
-
+        setHasOptionsMenu(true)
         return v
     }
 
@@ -119,14 +102,36 @@ class AddDataFragment : Fragment(),DatePickerDialog.OnDateSetListener, TimePicke
             date+="0"
         date = "$date$month-"
 
-        if(dayOfMonth <10)
-            date+="0"
+        if (dayOfMonth < 10)
+            date += "0"
 
-        return date+dayOfMonth
+        return date + dayOfMonth
 
     }
 
-    private fun displayDate(d:String,t:String){
+    private fun displayDate(d: String, t: String) {
         v.buttonDatePicker.text = "$d $t"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_for_addtask, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @InternalCoroutinesApi
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.updateOrAdd) {
+            if (v.buttonDatePicker.text.toString() == "")
+                Toast.makeText(context, "Select Date First", Toast.LENGTH_SHORT).show()
+            else if (v.ET_TaskName.text.toString() == "")
+                Toast.makeText(context, "Add Task Name", Toast.LENGTH_SHORT).show()
+            else {
+                addTaskToDatabase()
+                findNavController().navigate(R.id.action_addDataFragment_to_tasksFragment)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
