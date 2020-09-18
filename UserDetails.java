@@ -1,8 +1,8 @@
 package com.example.myapplication;
 
 public class UserDetails {
-    private String name="No name Provided";
-    private String email="No e-Mail Provided";
+    private String name;
+    private String email;
 
     public String getName() {
         return name;

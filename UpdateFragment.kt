@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_update.*
@@ -39,9 +40,11 @@ class UpdateFragment : Fragment(),DatePickerDialog.OnDateSetListener , TimePicke
             addDataToDatabase()
             // finish()
             findNavController().navigate(R.id.action_updateFragment_to_tasksFragment)
+            parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
         v.uDeleteButton.setOnClickListener {
             mTasksViewModel.deleteTask(args.taskObject)
+            parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             findNavController().navigate(R.id.action_updateFragment_to_tasksFragment)
         }
         return v

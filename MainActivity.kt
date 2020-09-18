@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -18,7 +17,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.InternalCoroutinesApi
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -26,9 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private val TAG = "MainActivity"
-    private var verificationInProgress =false
     private var storedVerificationId = ""
-    lateinit var postListener: Any
 
 
     @InternalCoroutinesApi
@@ -42,9 +38,8 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         ET_OTP_code.isEnabled = false
         supportActionBar?.hide()
-        var codeSent:Boolean = false
+        var codeSent = false
         //var mTasksViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
-
 
         if (currentUser != null)
             userLoggedIn()
@@ -190,12 +185,3 @@ class MainActivity : AppCompatActivity() {
         startActivity(intentToOpenTasks)
     }
 }
-
-
-
-
-
-
-
-
-
