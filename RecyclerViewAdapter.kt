@@ -36,40 +36,16 @@ open class RecyclerViewAdapter(
             holder.image.setImageResource(R.drawable.ic_user_check_solid)
             holder.name.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         } else {
-            if (task.date <= getDate())
+            holder.name.paintFlags = 0
+            // I don't know what this is but app dose'nt work without it
+
+            if (task.date <= MyDateObject().getCurrentDate())
                 holder.image.setImageResource(R.drawable.ic_user_times_solid)
             else
                 holder.image.setImageResource(R.drawable.person_task_incomplete)
         }
     }
 
-    private fun getDate(): String {
-        val year=Calendar.getInstance().get(Calendar.YEAR)
-        val month=Calendar.getInstance().get(Calendar.MONTH)
-        val dayOfMonth=Calendar.getInstance().get(Calendar.DATE)
-
-        var date="$year-"
-        if(month <10)
-            date+="0"
-        date = "$date$month-"
-        if(dayOfMonth <10)
-            date+="0"
-        date += dayOfMonth
-
-        val hourOfDay =Calendar.getInstance().get(Calendar.HOUR)
-        val minute = Calendar.getInstance().get(Calendar.MINUTE)
-
-        var time = ""
-        if (hourOfDay < 10)
-            time+="0"
-        time = "$time$hourOfDay:"
-
-        if (minute < 10)
-            time+="0"
-        time+=minute
-
-        return "$date $time"
-    }
 
     inner class MyViewHolder(view: View,val onTaskClickListner: OnTaskClickListener):RecyclerView.ViewHolder(view),View.OnClickListener{
         val name: TextView =view.TV_taskName

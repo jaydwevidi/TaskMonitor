@@ -9,6 +9,9 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.R
+import com.example.myapplication.Task
+import com.example.myapplication.Tasks
 import kotlinx.android.synthetic.main.fragment_add_data.*
 import kotlinx.android.synthetic.main.fragment_add_data.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -16,7 +19,7 @@ import java.util.*
 
 class AddDataFragment : Fragment(),DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     lateinit var v:View
-    var date:String = ""
+    lateinit var date:MyDateObject
 
 
     @InternalCoroutinesApi
@@ -63,7 +66,7 @@ class AddDataFragment : Fragment(),DatePickerDialog.OnDateSetListener, TimePicke
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-       this.date = dateAsString(year,month,dayOfMonth)
+       this.date = MyDateObject(year, month+1, dayOfMonth)
         showTimePicker()
     }
 
@@ -79,39 +82,12 @@ class AddDataFragment : Fragment(),DatePickerDialog.OnDateSetListener, TimePicke
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        displayDate(date, timeAsString(hourOfDay,minute))
+        date.hourOfDay = hourOfDay
+        date.minute = minute
+        v.buttonDatePicker.text = date.toString()
     }
 
-    private fun timeAsString( hourOfDay: Int, minute: Int):String{
-        var time = ""
-        if (hourOfDay < 10)
-            time+="0"
-        time = "$time$hourOfDay:"
 
-        if (minute < 10)
-            time+="0"
-        time+=minute
-
-        return time
-    }
-
-    private fun dateAsString(year: Int, month: Int, dayOfMonth: Int): String {
-        var date="$year-"
-
-        if(month <10)
-            date+="0"
-        date = "$date$month-"
-
-        if (dayOfMonth < 10)
-            date += "0"
-
-        return date + dayOfMonth
-
-    }
-
-    private fun displayDate(d: String, t: String) {
-        v.buttonDatePicker.text = "$d $t"
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_for_addtask, menu)

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.UpdateFragmentArgs
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -18,7 +19,7 @@ import java.util.*
 class UpdateFragment : Fragment(),DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener{
     private lateinit var v:View
     private val args by navArgs<UpdateFragmentArgs>()
-    private var date=""
+    private lateinit var date:MyDateObject
     @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +64,7 @@ class UpdateFragment : Fragment(),DatePickerDialog.OnDateSetListener , TimePicke
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        this.date = dateAsString(year,month,dayOfMonth)
+        this.date = MyDateObject(year, month+1, dayOfMonth)
         showTimePicker()
     }
 
@@ -79,40 +80,12 @@ class UpdateFragment : Fragment(),DatePickerDialog.OnDateSetListener , TimePicke
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-
-        displayDate(date, timeAsString(hourOfDay,minute))
+        date.hourOfDay = hourOfDay
+        date.minute = minute
+        v.ubuttonDatePicker.text = date.toString()
     }
 
-    private fun timeAsString( hourOfDay: Int, minute: Int):String{
-        var time = ""
-        if (hourOfDay < 10)
-            time+="0"
-        time = "$time$hourOfDay:"
 
-        if (minute < 10)
-            time+="0"
-        time+=minute
-
-        return time
-    }
-
-    private fun dateAsString(year: Int, month: Int, dayOfMonth: Int): String {
-        var date="$year-"
-
-        if(month <10)
-            date+="0"
-        date = "$date$month-"
-
-        if (dayOfMonth < 10)
-            date += "0"
-
-        return date + dayOfMonth
-
-    }
-
-    private fun displayDate(d: String, t: String) {
-        v.ubuttonDatePicker.text = "$d $t"
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

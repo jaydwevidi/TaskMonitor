@@ -16,19 +16,20 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.InternalCoroutinesApi
 
 class Tasks : AppCompatActivity() {
-    var userName=""
-    lateinit var auth:FirebaseAuth
+    var userName = ""
+    lateinit var auth: FirebaseAuth
 
     @InternalCoroutinesApi
     lateinit var mTasksViewModel: TaskViewModel
     private val TAG = "Tasks"
+
     @InternalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks)
-         mTasksViewModel= ViewModelProvider(this).get(TaskViewModel::class.java)
+        mTasksViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
 
-        auth=Firebase.auth
+        auth = Firebase.auth
         val uid = auth.uid
         val myRef = Firebase.database.reference.child("Users").child(uid!!)
 

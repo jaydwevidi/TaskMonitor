@@ -2,12 +2,13 @@ package com.example.myapplication
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.myapplication.Task
 
 
 @Dao
 interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTask(task:Task)
+    suspend fun addTask(task: Task)
 
     @Update
     suspend fun updateTask(task: Task)

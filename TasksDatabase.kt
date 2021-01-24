@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
-@Database(entities = [Task::class] , version = 1 , exportSchema = false)
+@Database(entities = [Task::class] , version = 2 , exportSchema = false)
 abstract class TasksDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
 

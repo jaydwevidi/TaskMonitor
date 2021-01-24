@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.TasksFragmentDirections
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_tasks.view.*
@@ -51,6 +52,7 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
             myRef.setValue(it)
             adapter.notifyDataSetChanged()
         })
+        adapter.notifyDataSetChanged()
         return view
     }
 
@@ -78,7 +80,10 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
         var mTasksViewModel = (activity as Tasks).mTasksViewModel
 
         if (item.itemId == R.id.add_sample_data) {
-            mTasksViewModel.addTaskList(SampleData().sampleTaskList)
+            mTasksViewModel.addTaskList(SampleData().sampleTaskList.shuffled())
+        }
+        if (item.itemId == R.id.deleteAll) {
+            mTasksViewModel.deleteAll()
         }
         return super.onOptionsItemSelected(item)
     }
