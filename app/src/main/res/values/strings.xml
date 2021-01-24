@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="taskmonitor1">TaskMonitor1</string>
+    <string name="TermsAndConditions"><a href="https://flicksandpieces.files.wordpress.com/2015/01/game-of-thrones-fan-art-by-james-bousema-king-hodor.jpeg">Terms and Conditions</a></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
