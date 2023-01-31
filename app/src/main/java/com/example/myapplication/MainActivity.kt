@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE
                 ET_PhoneNumber.isEnabled = false
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    "+91 ${ET_PhoneNumber.text}",
+                    "+${ET_PhoneNumber.text}",
                     60,
                     TimeUnit.SECONDS,
                     this,
