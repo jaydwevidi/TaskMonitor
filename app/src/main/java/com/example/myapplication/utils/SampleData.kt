@@ -1,5 +1,5 @@
-package com.example.myapplication
-
+package com.example.myapplication.utils
+import com.example.myapplication.Task
 class SampleData {
     val sampleTaskList = mutableListOf<Task>()
 

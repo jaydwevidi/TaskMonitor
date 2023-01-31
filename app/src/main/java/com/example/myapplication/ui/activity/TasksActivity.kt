@@ -1,10 +1,11 @@
-package com.example.myapplication
+package com.example.myapplication.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,7 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class Tasks : AppCompatActivity() {
+class TasksActivity : AppCompatActivity() {
     var userName = ""
     lateinit var auth: FirebaseAuth
 

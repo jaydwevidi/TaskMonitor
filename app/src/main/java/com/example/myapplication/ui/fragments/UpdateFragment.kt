@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.MyDateObject
+import com.example.myapplication.R
+import com.example.myapplication.Task
+import com.example.myapplication.ui.activity.TasksActivity
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -18,7 +22,7 @@ import java.util.*
 class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener,
     TimePickerDialog.OnTimeSetListener {
     private lateinit var v: View
-    private val args by navArgs<UpdateFragmentArgs>()
+    private val args by navArgs<com.example.myapplication.ui.fragments.UpdateFragmentArgs>()
     private lateinit var date: MyDateObject
 
     @InternalCoroutinesApi
@@ -36,13 +40,13 @@ class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener,
             showDatePicker()
         }
 
-        val mTasksViewModel = (activity as Tasks).mTasksViewModel
+        val mTasksViewModel = (activity as TasksActivity).mTasksViewModel
         return v
     }
 
     @InternalCoroutinesApi
     private fun addDataToDatabase() {
-        val mTasksViewModel = (activity as Tasks).mTasksViewModel
+        val mTasksViewModel = (activity as TasksActivity).mTasksViewModel
         mTasksViewModel.updateTask(
             Task(
                 args.taskObject.id,
@@ -95,7 +99,7 @@ class UpdateFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     @InternalCoroutinesApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val mTasksViewModel = (activity as Tasks).mTasksViewModel
+        val mTasksViewModel = (activity as TasksActivity).mTasksViewModel
         if (item.itemId == R.id.deleteTaskMenuItem) {
             mTasksViewModel.deleteTask(args.taskObject)
             parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)

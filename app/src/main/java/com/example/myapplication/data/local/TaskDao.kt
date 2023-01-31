@@ -1,7 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.myapplication.Task
 
 
 @Dao

@@ -10,9 +10,9 @@
         android:label="Task Monitor"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Tasks" />
-        <activity android:name=".Register" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activity.TasksActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

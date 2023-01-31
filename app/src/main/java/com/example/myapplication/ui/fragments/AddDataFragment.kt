@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -9,6 +9,10 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.MyDateObject
+import com.example.myapplication.R
+import com.example.myapplication.Task
+import com.example.myapplication.ui.activity.TasksActivity
 import kotlinx.android.synthetic.main.fragment_add_data.*
 import kotlinx.android.synthetic.main.fragment_add_data.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -40,7 +44,7 @@ class AddDataFragment : Fragment(), DatePickerDialog.OnDateSetListener,
 
     @InternalCoroutinesApi
     private fun addTaskToDatabase() {
-        val mTasksViewModel = (activity as Tasks).mTasksViewModel
+        val mTasksViewModel = (activity as TasksActivity).mTasksViewModel
         mTasksViewModel.addTask(
             Task(
                 0,

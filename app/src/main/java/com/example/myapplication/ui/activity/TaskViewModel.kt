@@ -1,9 +1,12 @@
-package com.example.myapplication
+package com.example.myapplication.ui.activity
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.Task
+import com.example.myapplication.data.TasksRepository
+import com.example.myapplication.data.local.TasksDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.launch

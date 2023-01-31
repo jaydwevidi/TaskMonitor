@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.*
+import com.example.myapplication.ui.activity.TasksActivity
+import com.example.myapplication.utils.SampleData
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_tasks.view.*
@@ -15,7 +18,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
     lateinit var list: List<Task>
     private val TAG = "TasksFragment"
-    val adapter = RecyclerViewAdapter(mutableListOf<Task>(), this)
+    val adapter = RecyclerViewAdapter(mutableListOf(), this)
 
 
     @InternalCoroutinesApi
@@ -26,12 +29,12 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_tasks, container, false)
         // Inflate the layout for this fragment
-        var mTasksViewModel = (activity as Tasks).mTasksViewModel
+        var mTasksViewModel = (activity as TasksActivity).mTasksViewModel
         view.rvTasks.layoutManager = LinearLayoutManager(context)
 
         view.rvTasks.adapter = adapter
         adapter.notifyDataSetChanged()
-        val uid = (activity as Tasks).auth.uid
+        val uid = (activity as TasksActivity).auth.uid
         val myRef = Firebase.database.reference.child("Tasks").child(uid!!)
 
         view.floatingActionButton.setOnClickListener(View.OnClickListener {
@@ -76,7 +79,7 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
 
     @InternalCoroutinesApi
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var mTasksViewModel = (activity as Tasks).mTasksViewModel
+        var mTasksViewModel = (activity as TasksActivity).mTasksViewModel
 
         if (item.itemId == R.id.add_sample_data) {
             mTasksViewModel.addTaskList(SampleData().sampleTaskList.shuffled())
@@ -89,7 +92,10 @@ class TasksFragment : Fragment(), RecyclerViewAdapter.OnTaskClickListener {
 
 
     override fun onTaskClick(position: Int) {
-        val action = TasksFragmentDirections.actionTasksFragmentToUpdateFragment(list[position])
+        val action =
+            TasksFragmentDirections.actionTasksFragmentToUpdateFragment(
+                list[position]
+            )
         findNavController().navigate(action)
     }
 }

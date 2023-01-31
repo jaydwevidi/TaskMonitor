@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.example.myapplication.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -176,9 +177,9 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, "Users/$uid Value is: $value")
                     progressBar.visibility = View.INVISIBLE
                     if (value == null) {
-                        var intentToRegister = Intent(this@MainActivity, Register::class.java)
-                        intentToRegister.putExtra("uid", uid)
-                        startActivity(intentToRegister)
+                        var intentToRegisterActivity = Intent(this@MainActivity, RegisterActivity::class.java)
+                        intentToRegisterActivity.putExtra("uid", uid)
+                        startActivity(intentToRegisterActivity)
                         finish()
                     } else {
                         openTasksActivity()
@@ -197,7 +198,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openTasksActivity() {
-        var intentToOpenTasks = Intent(this, Tasks::class.java)
+        var intentToOpenTasks = Intent(this, TasksActivity::class.java)
         startActivity(intentToOpenTasks)
     }
 }

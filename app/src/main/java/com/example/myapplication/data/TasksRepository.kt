@@ -1,6 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
+import com.example.myapplication.Task
+import com.example.myapplication.data.local.TaskDao
 
 class TasksRepository(private val taskDao: TaskDao) {
     val readAllData: LiveData<List<Task>> = taskDao.readAllData()
